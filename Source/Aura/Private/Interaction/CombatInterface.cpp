@@ -12,4 +12,3 @@ int32 ICombatInterface::GetPlayerLevel()
 }
 
 
-
