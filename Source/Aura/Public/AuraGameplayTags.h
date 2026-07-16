@@ -18,6 +18,7 @@ public:
 	FGameplayTag Attributes_Primary_Intelligence;
 	FGameplayTag Attributes_Primary_Resilience;
 	FGameplayTag Attributes_Primary_Vigor;
+	FGameplayTag Attributes_Primary_XP;
 
 
 	FGameplayTag Attributes_Secondary_Armor;
@@ -36,6 +37,8 @@ public:
 	FGameplayTag Attributes_Resistance_Arcane;
 	FGameplayTag Attributes_Resistance_Physical;
 
+	FGameplayTag Attributes_Meta_IncomingXP;
+
 	FGameplayTag InputTag_LMB;
 	FGameplayTag InputTag_RMB;
 	FGameplayTag InputTag_1;
@@ -53,6 +56,8 @@ public:
 	FGameplayTag Abilities_Summon;
 
 	FGameplayTag Abilities_Fire_FireBolt;
+
+	FGameplayTag Cooldown_Fire_FireBolt;
 
 	FGameplayTag CombatSocket_Weapon;
 	FGameplayTag CombatSocket_RightHand;

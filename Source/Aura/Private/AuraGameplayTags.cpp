@@ -160,6 +160,13 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 		FString("Tag granted when Hit Reacting")
 	);
 	/*
+	* ÔªÊôÐÔ
+	*/
+	GameplayTags.Attributes_Meta_IncomingXP = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Attributes.Meta.IncomingXP"),
+		FString("Incoming XP meta")
+	);
+	/*
 	* Abilities
 	*/
 	GameplayTags.Abilities_Attack = UGameplayTagsManager::Get().AddNativeGameplayTag(
@@ -173,6 +180,15 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Abilities_Fire_FireBolt = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Abilities..Fire.FireBolt"),
 		FString("FireBolt Ability Tag")
+	);
+
+	/*
+	* Cooldown tags
+	*/
+
+	GameplayTags.Cooldown_Fire_FireBolt = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Cooldown.Fire.FireBolt"),
+		FString("FireBolt Cooldown Tag")
 	);
 
 	/*
