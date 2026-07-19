@@ -31,5 +31,5 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AbilityInformation")
 	TArray<FAuraLevelUpInfoRow> LevelUpInformation;
 	
-	int32 FindLevelForXp(int32 XP);
+	int32 FindLevelForXP(int32 XP);
 };

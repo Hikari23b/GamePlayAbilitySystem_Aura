@@ -3,7 +3,7 @@
 
 #include "AbilitySystem/Data/AuraLevelUpInfo.h"
 
-int32 UAuraLevelUpInfo::FindLevelForXp(int32 XP)
+int32 UAuraLevelUpInfo::FindLevelForXP(int32 XP)
 {
 	int32 Level = 1;
 	bool bSearching = true;

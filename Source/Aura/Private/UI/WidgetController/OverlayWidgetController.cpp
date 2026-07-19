@@ -24,6 +24,12 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 {
 	AAuraPlayerState* AuraPlayerState = CastChecked<AAuraPlayerState>(PlayerState);
 	AuraPlayerState->OnXPChangedDelegate.AddUObject(this, &UOverlayWidgetController::OnXPChanged);
+	AuraPlayerState->OnLevelChangedDelegate.AddLambda(
+		[this](int32 NewLevel)
+		{
+			OnPlayerLevelChangedDelegate.Broadcast(NewLevel);
+		}
+	);
 
 	const UAuraAttributeSet* AuraAttributeSet = CastChecked<UAuraAttributeSet>(AttributeSet);
 
@@ -100,7 +106,7 @@ void UOverlayWidgetController::OnXPChanged(int32 NewXP)
 	UAuraLevelUpInfo* LevelUpInfo = AuraPlayerState->LevelUpInfo;
 	checkf(LevelUpInfo, TEXT("fill out blueprint"));
 
-	int32 Level = LevelUpInfo->FindLevelForXp(NewXP);
+	int32 Level = LevelUpInfo->FindLevelForXP(NewXP);
 	int32 MaxLevel = LevelUpInfo->LevelUpInformation.Num();
 
 	if (Level <= MaxLevel && Level > 0)
