@@ -11,6 +11,7 @@ class UAbilitySystemComponent;
 class UAttributeSet;
 struct FWidgetControllerParams;
 class UMenuWidgetController;
+class USpellMenuWidgetController;
 /**
  * 
  */
@@ -24,6 +25,7 @@ public:
 	void InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS);
 	UOverlayWidgetController* GetOverlayWidgetController(const FWidgetControllerParams& WCParams);
 	UMenuWidgetController* GetAttributeMenuWidgetController(const FWidgetControllerParams& WCParams);
+	USpellMenuWidgetController* GetSpellMenuWidgetController(const FWidgetControllerParams& WCParams);
 protected:
 private:
 	UPROPERTY()
@@ -43,5 +45,11 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UMenuWidgetController> AttributeMenuWidgetControllerClass;
+
+	UPROPERTY()
+	TObjectPtr<USpellMenuWidgetController> SpellMenuWidgetController;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<USpellMenuWidgetController> SpellMenuWidgetControllerClass;
 
 };
