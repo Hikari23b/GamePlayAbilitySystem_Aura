@@ -185,6 +185,10 @@ void FAuraGameplayTags::InitializeNativeGameplayTags()
 		FName("Abilities.Sumon"),
 		FString("Summon Ability Tag")
 	);
+	GameplayTags.Abilities_None = UGameplayTagsManager::Get().AddNativeGameplayTag(
+		FName("Abilities.None"),
+		FString("None Ability Tag")
+	);
 	GameplayTags.Abilities_HitReact = UGameplayTagsManager::Get().AddNativeGameplayTag(
 		FName("Abilities.HitReact"),
 		FString("HitReact Ability Tag")
