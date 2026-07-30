@@ -57,6 +57,14 @@ void USpellMenuWidgetController::BindCallbacksToDependencies()
 
 void USpellMenuWidgetController::SpellGlobeSelected(const FGameplayTag& AbilityTag)
 {
+	if (bWaitngForEquipSelection)
+	{
+		FGameplayTag SelectedAbilityType = AbilityInfo->FindAbilityInfoForTag(SelectedAbility.Ability).AbilityType;
+		StopWaitingForEquipDelegate.Broadcast(SelectedAbilityType);
+		bWaitngForEquipSelection = false;
+	}
+
+
 	const FAuraGameplayTags GameplayTag = FAuraGameplayTags::Get();
 	const int32 SpellPoints = GetAuraPS()->GetSpellPoints();
 	FGameplayTag AbilityStatus;
@@ -95,10 +103,38 @@ void USpellMenuWidgetController::SpendPointButtonPressed()
 
 void USpellMenuWidgetController::GolbeDeselect()
 {
+	if (bWaitngForEquipSelection)
+	{
+		FGameplayTag SelectedAbilityType = AbilityInfo->FindAbilityInfoForTag(SelectedAbility.Ability).AbilityType;
+		StopWaitingForEquipDelegate.Broadcast(SelectedAbilityType);
+		bWaitngForEquipSelection = false;
+	}
+
 	SelectedAbility.Ability = FAuraGameplayTags::Get().Abilities_None;
 	SelectedAbility.Status = FAuraGameplayTags::Get().Abilities_Status_Locked;
 
 	SpellGlobeSelectedDelegate.Broadcast(false, false, FString(), FString());
+}
+
+void USpellMenuWidgetController::EquipButtonPressed()
+{
+	const FGameplayTag AbilityType = AbilityInfo->FindAbilityInfoForTag(SelectedAbility.Ability).AbilityType;
+
+	WaitForEquipDelegate.Broadcast(AbilityType);
+	bWaitngForEquipSelection = true;
+
+	const FGameplayTag SelectedStatus = GetAuraASC()->GetStatusFromAbilityTag(SelectedAbility.Ability);
+	if (SelectedStatus.MatchesTagExact(FAuraGameplayTags::Get().Abilities_Status_Equipped))
+	{
+		SelectedSlot = GetAuraASC()->GetInoutTagFromAbilityTag(SelectedAbility.Ability);
+	}
+}
+
+void USpellMenuWidgetController::SpellRowGlobePressed(const FGameplayTag& SlotTag, const FGameplayTag& AbilityType)
+{
+	if (!bWaitngForEquipSelection) return;
+	const FGameplayTag& SelectedAbilityType = AbilityInfo->FindAbilityInfoForTag(SelectedAbility.Ability).AbilityType;
+	if (!SelectedAbilityType.MatchesTagExact(AbilityType)) return;
 }
 
 void USpellMenuWidgetController::ShouldEnableButtons(const FGameplayTag& AbilityStatus, int32 SpellPoints,
